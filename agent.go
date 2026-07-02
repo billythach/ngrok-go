@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"log"
 	"net"
 	"net/url"
 	"slices"
@@ -74,47 +75,76 @@ func NewAgent(agentOpts ...AgentOption) (Agent, error) {
 // Connect begins a new Session by connecting and authenticating to the ngrok
 // cloud service.
 func (a *agent) Connect(ctx context.Context) error {
+	debugf := func(format string, args ...interface{}) {
+		log.Printf("[DEBUG] agent.Connect: "+format, args...)
+	}
+
+	debugf("start (autoConnect=%v, proxyConfigured=%v, hasCustomDialer=%v, hasRPCHandler=%v)", a.opts.autoConnect, a.opts.proxyURL != "", a.opts.dialer != nil, a.opts.rpcHandler != nil)
+	if deadline, ok := ctx.Deadline(); ok {
+		debugf("context deadline set: %s (remaining=%s)", deadline.Format(time.RFC3339Nano), time.Until(deadline))
+	} else {
+		debugf("context has no deadline")
+	}
+
 	a.mu.Lock()
 	defer a.mu.Unlock()
+	debugf("agent mutex acquired")
 
 	// If we're already connected, return an error
 	if a.sess != nil && a.agentSession != nil {
+		debugf("already connected (sessionID=%s) - aborting", a.agentSession.id)
 		return errors.New("agent already connected")
 	}
+	debugf("agent is not connected, continuing setup")
 
 	// Add legacy connect handlers for events
 	legacyOpts := append([]legacy.ConnectOption{}, a.opts.sessionOpts...)
+	debugf("copied %d session connect options", len(legacyOpts))
 
 	// Process proxy URL if provided
 	if a.opts.proxyURL != "" {
+		debugf("proxy URL configured: %s", a.opts.proxyURL)
 		parsedURL, err := url.Parse(a.opts.proxyURL)
 		if err != nil {
+			debugf("proxy URL parse failed: %v", err)
 			return fmt.Errorf("invalid proxy URL: %w", err)
 		}
+		debugf("proxy URL parsed successfully (scheme=%s, host=%s)", parsedURL.Scheme, parsedURL.Host)
 
 		// Determine the base dialer to use for connecting to the proxy
 		baseDialer := a.opts.dialer
 		if baseDialer == nil {
 			// If no custom dialer is provided, use a standard net.Dialer
+			debugf("no custom dialer set, using default net.Dialer")
 			baseDialer = &net.Dialer{}
+		} else {
+			debugf("using existing custom dialer for proxy initialization")
 		}
 
 		// Create a proxy dialer using the base dialer
 		proxyDialer, err := proxy.FromURL(parsedURL, baseDialer)
 		if err != nil {
+			debugf("proxy dialer initialization failed: %v", err)
 			return fmt.Errorf("failed to initialize proxy: %w", err)
 		}
+		debugf("proxy dialer initialized successfully")
 
 		// We know FromURL returns a Dialer-compatible type
 		dialer, ok := proxyDialer.(Dialer)
 		if !ok {
+			debugf("proxy dialer type assertion to ngrok Dialer failed (type=%T)", proxyDialer)
 			return fmt.Errorf("proxy dialer is not compatible with ngrok Dialer interface")
 		}
+		debugf("proxy dialer is compatible with ngrok Dialer")
 
 		// Set the dialer in our options
 		a.opts.dialer = dialer
+		debugf("stored proxy dialer in agent options")
 		// Pass it to the legacy package
 		legacyOpts = append(legacyOpts, legacy.WithDialer(dialer))
+		debugf("appended legacy.WithDialer option (total options=%d)", len(legacyOpts))
+	} else {
+		debugf("no proxy URL configured")
 	}
 
 	// Create our AgentSession wrapper early so we can capture it in closures
@@ -122,45 +152,62 @@ func (a *agent) Connect(ctx context.Context) error {
 		agent:     a,
 		startedAt: time.Now(),
 	}
+	debugf("created agentSession wrapper (startedAt=%s)", agentSession.startedAt.Format(time.RFC3339Nano))
 
 	// Hook up connect event
 	legacyOpts = append(legacyOpts, legacy.WithConnectHandler(func(_ context.Context, sess legacy.Session) {
+		debugf("connect handler invoked (agentSessionID=%s)", sess.AgentSessionID())
 		a.emitEvent(newAgentConnectSucceeded(a, agentSession))
 	}))
+	debugf("registered connect handler (total options=%d)", len(legacyOpts))
 
 	// Hook up disconnect event
 	legacyOpts = append(legacyOpts, legacy.WithDisconnectHandler(func(_ context.Context, sess legacy.Session, err error) {
+		debugf("disconnect handler invoked (agentSessionID=%s, err=%v)", sess.AgentSessionID(), err)
 		a.emitEvent(newAgentDisconnected(a, agentSession, err))
 	}))
+	debugf("registered disconnect handler (total options=%d)", len(legacyOpts))
 
 	// Hook up heartbeat event
 	legacyOpts = append(legacyOpts, legacy.WithHeartbeatHandler(func(_ context.Context, sess legacy.Session, latency time.Duration) {
+		debugf("heartbeat handler invoked (agentSessionID=%s, latency=%s)", sess.AgentSessionID(), latency)
 		a.emitEvent(newAgentHeartbeatReceived(a, agentSession, latency))
 	}))
+	debugf("registered heartbeat handler (total options=%d)", len(legacyOpts))
 
 	// If an RPC handler is registered, hook up the command handlers
 	if a.opts.rpcHandler != nil {
+		debugf("rpc handler configured, registering stop/restart/update command handlers")
 		// Register the command handlers that delegate to the RPC handler
 		legacyOpts = append(legacyOpts,
 			legacy.WithStopHandler(a.createCommandHandler(rpc.StopAgentMethod)),
 			legacy.WithRestartHandler(a.createCommandHandler(rpc.RestartAgentMethod)),
 			legacy.WithUpdateHandler(a.createCommandHandler(rpc.UpdateAgentMethod)),
 		)
+		debugf("registered RPC command handlers (total options=%d)", len(legacyOpts))
+	} else {
+		debugf("no rpc handler configured")
 	}
 
 	// Create a new ngrok session
+	debugf("calling legacy.Connect with %d options", len(legacyOpts))
 	sess, err := legacy.Connect(ctx, legacyOpts...)
 	if err != nil {
+		debugf("legacy.Connect failed: %v", err)
 		return wrapError(err)
 	}
+	debugf("legacy.Connect succeeded (agentSessionID=%s, warnings=%d)", sess.AgentSessionID(), len(sess.Warnings()))
 
 	// Complete the AgentSession wrapper with session-specific data
 	agentSession.id = sess.AgentSessionID()
 	agentSession.warnings = sess.Warnings()
+	debugf("agentSession populated (id=%s, warnings=%d)", agentSession.id, len(agentSession.warnings))
 
 	// Store in agent
 	a.sess = sess
 	a.agentSession = agentSession
+	debugf("agent state updated with active session")
+	debugf("connect complete")
 
 	return nil
 }

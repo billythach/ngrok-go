@@ -3,5 +3,6 @@
 .direnv
 .env
 .idea/*
+*.iml
 /go.work.sum
 cover.out
