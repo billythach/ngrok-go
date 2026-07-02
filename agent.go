@@ -13,9 +13,9 @@ import (
 
 	"golang.org/x/net/proxy"
 
-	"golang.ngrok.com/ngrok/v2/internal/legacy"
-	"golang.ngrok.com/ngrok/v2/internal/legacy/config"
-	"golang.ngrok.com/ngrok/v2/rpc"
+	"github.com/billythach/ngrok-go/v2/internal/legacy"
+	"github.com/billythach/ngrok-go/v2/internal/legacy/config"
+	"github.com/billythach/ngrok-go/v2/rpc"
 )
 
 // Agent is the main interface for interacting with the ngrok service.
