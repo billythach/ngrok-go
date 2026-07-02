@@ -5,7 +5,7 @@ import (
 	"net"
 	"testing"
 
-	"golang.ngrok.com/ngrok/v2/internal/tlstest"
+	"github.com/billythach/ngrok-go/v2/internal/tlstest"
 )
 
 // TestWrapConnWithTLS tests the TLS connection wrapper

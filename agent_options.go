@@ -6,7 +6,7 @@ import (
 	"log/slog"
 	"time"
 
-	"golang.ngrok.com/ngrok/v2/internal/legacy"
+	"github.com/billythach/ngrok-go/v2/internal/legacy"
 )
 
 // AgentOption is a functional option used to configure NewAgent.

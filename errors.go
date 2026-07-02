@@ -3,7 +3,7 @@ package ngrok
 import (
 	"errors"
 
-	"golang.ngrok.com/ngrok/v2/internal/legacy"
+	"github.com/billythach/ngrok-go/v2/internal/legacy"
 )
 
 // Error is a custom error type that includes a unique ngrok error code.

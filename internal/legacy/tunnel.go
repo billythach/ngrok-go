@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"time"
 
-	tunnel_client "golang.ngrok.com/ngrok/v2/internal/tunnel/client"
+	tunnel_client "github.com/billythach/ngrok-go/v2/internal/tunnel/client"
 )
 
 // Tunnel is a [net.Listener] created by a call to [Listen] or

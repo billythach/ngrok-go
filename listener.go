@@ -5,7 +5,7 @@ import (
 	"crypto/tls"
 	"net"
 
-	"golang.ngrok.com/ngrok/v2/internal/legacy"
+	"github.com/billythach/ngrok-go/v2/internal/legacy"
 )
 
 // EndpointListener is an endpoint that you may treat as a net.Listener.

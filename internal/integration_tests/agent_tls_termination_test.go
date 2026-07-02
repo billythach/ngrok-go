@@ -10,10 +10,10 @@ import (
 	"testing"
 	"time"
 
+	"github.com/billythach/ngrok-go/v2/internal/tlstest"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"golang.ngrok.com/ngrok/v2"
-	"golang.ngrok.com/ngrok/v2/internal/tlstest"
 )
 
 type tlsHandlerResult struct {

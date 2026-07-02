@@ -9,8 +9,8 @@ import (
 
 	"github.com/jpillora/backoff"
 
-	"golang.ngrok.com/ngrok/v2/internal/tunnel/netx"
-	"golang.ngrok.com/ngrok/v2/internal/tunnel/proto"
+	"github.com/billythach/ngrok-go/v2/internal/tunnel/netx"
+	"github.com/billythach/ngrok-go/v2/internal/tunnel/proto"
 )
 
 var ErrSessionNotReady = errors.New("an ngrok tunnel session has not yet been established")

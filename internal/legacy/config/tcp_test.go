@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"golang.ngrok.com/ngrok/v2/internal/tunnel/proto"
+	"github.com/billythach/ngrok-go/v2/internal/tunnel/proto"
 )
 
 func TestTCP(t *testing.T) {

@@ -6,8 +6,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/billythach/ngrok-go/v2/internal/pb"
 	"golang.ngrok.com/muxado/v2"
-	"golang.ngrok.com/ngrok/v2/internal/pb"
 )
 
 type ReqType muxado.StreamType

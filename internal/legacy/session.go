@@ -20,11 +20,11 @@ import (
 	"go.uber.org/multierr"
 	"golang.org/x/net/proxy"
 
-	"golang.ngrok.com/ngrok/v2/internal/legacy/config"
+	"github.com/billythach/ngrok-go/v2/internal/legacy/config"
 
+	tunnel_client "github.com/billythach/ngrok-go/v2/internal/tunnel/client"
+	"github.com/billythach/ngrok-go/v2/internal/tunnel/proto"
 	"golang.ngrok.com/muxado/v2"
-	tunnel_client "golang.ngrok.com/ngrok/v2/internal/tunnel/client"
-	"golang.ngrok.com/ngrok/v2/internal/tunnel/proto"
 )
 
 // The ngrok library version.

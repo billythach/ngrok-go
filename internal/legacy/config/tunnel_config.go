@@ -3,7 +3,7 @@ package config
 import (
 	"net/url"
 
-	"golang.ngrok.com/ngrok/v2/internal/tunnel/proto"
+	"github.com/billythach/ngrok-go/v2/internal/tunnel/proto"
 )
 
 // Tunnel is a marker interface for options that can be used to start

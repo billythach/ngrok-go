@@ -3,7 +3,7 @@ package legacy
 import (
 	"net/url"
 
-	"golang.ngrok.com/ngrok/v2/internal/tunnel/proto"
+	"github.com/billythach/ngrok-go/v2/internal/tunnel/proto"
 )
 
 // This is the internal-only interface that all config.Tunnel implementations

@@ -16,8 +16,8 @@ import (
 	"github.com/stretchr/testify/require"
 	"golang.org/x/net/websocket"
 
-	"golang.ngrok.com/ngrok/v2/internal/legacy/config"
-	"golang.ngrok.com/ngrok/v2/internal/testcontext"
+	"github.com/billythach/ngrok-go/v2/internal/legacy/config"
+	"github.com/billythach/ngrok-go/v2/internal/testcontext"
 )
 
 func newTestLogger(t *testing.T) *slog.Logger {

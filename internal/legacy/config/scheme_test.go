@@ -3,7 +3,7 @@ package config
 import (
 	"testing"
 
-	"golang.ngrok.com/ngrok/v2/internal/tunnel/proto"
+	"github.com/billythach/ngrok-go/v2/internal/tunnel/proto"
 )
 
 func TestScheme(t *testing.T) {

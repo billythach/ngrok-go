@@ -13,9 +13,9 @@ import (
 
 	muxado "golang.ngrok.com/muxado/v2"
 
-	"golang.ngrok.com/ngrok/v2/internal/testcontext"
-	"golang.ngrok.com/ngrok/v2/internal/tlstest"
-	"golang.ngrok.com/ngrok/v2/internal/tunnel/proto"
+	"github.com/billythach/ngrok-go/v2/internal/testcontext"
+	"github.com/billythach/ngrok-go/v2/internal/tlstest"
+	"github.com/billythach/ngrok-go/v2/internal/tunnel/proto"
 )
 
 // TestDiagnoseTCPFailure verifies that a connection refused at the TCP level

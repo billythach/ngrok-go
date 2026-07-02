@@ -16,9 +16,9 @@ import (
 
 	muxado "golang.ngrok.com/muxado/v2"
 
-	"golang.ngrok.com/ngrok/v2/internal/legacy"
-	tunnelclient "golang.ngrok.com/ngrok/v2/internal/tunnel/client"
-	"golang.ngrok.com/ngrok/v2/internal/tunnel/proto"
+	"github.com/billythach/ngrok-go/v2/internal/legacy"
+	tunnelclient "github.com/billythach/ngrok-go/v2/internal/tunnel/client"
+	"github.com/billythach/ngrok-go/v2/internal/tunnel/proto"
 )
 
 // DiagnoseResult holds the outcome of a successful diagnostic probe.

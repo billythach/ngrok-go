@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/url"
 
-	"golang.ngrok.com/ngrok/v2/internal/legacy/config"
+	"github.com/billythach/ngrok-go/v2/internal/legacy/config"
 )
 
 // EndpointOption is a functional option used to configure endpoints.

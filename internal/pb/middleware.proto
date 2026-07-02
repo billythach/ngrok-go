@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package agent_internal;
 
-option go_package = "golang.ngrok.com/ngrok/v2/internal/pb";
+option go_package = "github.com/billythach/ngrok-go/v2/internal/pb";
 
 message MiddlewareConfiguration {
   Compression compression = 1;

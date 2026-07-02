@@ -10,8 +10,8 @@ import (
 	"sync"
 	"time"
 
-	"golang.ngrok.com/ngrok/v2/internal/tunnel/netx"
-	"golang.ngrok.com/ngrok/v2/internal/tunnel/proto"
+	"github.com/billythach/ngrok-go/v2/internal/tunnel/netx"
+	"github.com/billythach/ngrok-go/v2/internal/tunnel/proto"
 
 	"golang.ngrok.com/muxado/v2"
 )

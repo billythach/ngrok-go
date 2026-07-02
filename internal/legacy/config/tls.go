@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"net/url"
 
-	"golang.ngrok.com/ngrok/v2/internal/pb"
-	"golang.ngrok.com/ngrok/v2/internal/tunnel/proto"
+	"github.com/billythach/ngrok-go/v2/internal/pb"
+	"github.com/billythach/ngrok-go/v2/internal/tunnel/proto"
 )
 
 type TLSEndpointOption interface {

@@ -14,9 +14,9 @@ import (
 	"testing"
 	"time"
 
+	"github.com/billythach/ngrok-go/v2/internal/testcontext"
 	"github.com/stretchr/testify/require"
 	"golang.ngrok.com/ngrok/v2"
-	"golang.ngrok.com/ngrok/v2/internal/testcontext"
 )
 
 type httpStatusError struct {

@@ -11,9 +11,9 @@ import (
 	"sync"
 	"time"
 
+	"github.com/billythach/ngrok-go/v2/internal/tunnel/netx"
+	"github.com/billythach/ngrok-go/v2/internal/tunnel/proto"
 	"golang.ngrok.com/muxado/v2"
-	"golang.ngrok.com/ngrok/v2/internal/tunnel/netx"
-	"golang.ngrok.com/ngrok/v2/internal/tunnel/proto"
 )
 
 type RawSession interface {
