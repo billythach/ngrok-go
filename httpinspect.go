@@ -9,7 +9,7 @@ import (
 	"net/http/httputil"
 	"time"
 
-	"golang.ngrok.com/ngrok/v2/internal/httpx"
+	"github.com/billythach/ngrok-go/v2/internal/httpx"
 )
 
 // httpServe uses httputil.ReverseProxy to forward HTTP traffic from the proxy
