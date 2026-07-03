@@ -3,7 +3,7 @@ package ngrok
 import (
 	"context"
 
-	"golang.ngrok.com/ngrok/v2/rpc"
+	"github.com/billythach/ngrok-go/v2/rpc"
 )
 
 // RPCHandler is a function that processes RPC requests from the ngrok service.

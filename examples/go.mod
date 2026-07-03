@@ -4,7 +4,7 @@ go 1.26.4
 
 require (
 	github.com/valyala/fasthttp v1.56.0
-	golang.ngrok.com/ngrok/v2 v2.1.4
+	github.com/billythach/ngrok-go/v2 v2.1.4
 )
 
 require (
@@ -19,6 +19,6 @@ require (
 )
 
 replace (
-	golang.ngrok.com/ngrok/v2 => ../
-	golang.ngrok.com/ngrok/v2/rpc => ../rpc
+	github.com/billythach/ngrok-go/v2 => ../
+	github.com/billythach/ngrok-go/v2/rpc => ../rpc
 )

@@ -3,8 +3,8 @@ package integration_tests
 import (
 	"testing"
 
+	"github.com/billythach/ngrok-go/v2"
 	"github.com/stretchr/testify/assert"
-	"golang.ngrok.com/ngrok/v2"
 )
 
 // TestListenWithHTTPSURL tests using WithURL to specify an https URL

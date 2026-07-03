@@ -8,8 +8,6 @@ import (
 	"io"
 	"log"
 	"net"
-
-	"golang.ngrok.com/ngrok/v2"
 )
 
 func main() {

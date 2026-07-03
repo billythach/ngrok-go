@@ -8,9 +8,9 @@ import (
 	"testing"
 	"time"
 
+	"github.com/billythach/ngrok-go/v2"
 	"github.com/billythach/ngrok-go/v2/internal/testutil"
 	"github.com/stretchr/testify/require"
-	"golang.ngrok.com/ngrok/v2"
 )
 
 // erroringDialer implements the ngrok.Dialer interface for testing

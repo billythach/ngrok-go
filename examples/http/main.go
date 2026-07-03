@@ -5,8 +5,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-
-	"golang.ngrok.com/ngrok/v2"
 )
 
 func main() {

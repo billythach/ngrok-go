@@ -5,8 +5,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-
-	"golang.ngrok.com/ngrok/v2"
 )
 
 // how to invoke this example:

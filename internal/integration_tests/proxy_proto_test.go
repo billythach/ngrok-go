@@ -13,11 +13,11 @@ import (
 	"testing"
 	"time"
 
+	"github.com/billythach/ngrok-go/v2"
 	"github.com/billythach/ngrok-go/v2/internal/testutil"
 	"github.com/billythach/ngrok-go/v2/internal/tlstest"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"golang.ngrok.com/ngrok/v2"
 )
 
 // parseProxyProtocolHeader extracts client and server information from a PROXY protocol header.

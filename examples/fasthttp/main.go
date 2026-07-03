@@ -6,8 +6,6 @@ import (
 	"log"
 
 	"github.com/valyala/fasthttp"
-
-	"golang.ngrok.com/ngrok/v2"
 )
 
 func main() {

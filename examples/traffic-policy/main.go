@@ -10,8 +10,6 @@ import (
 	"log/slog"
 	"net/http"
 	"os"
-
-	"golang.ngrok.com/ngrok/v2"
 )
 
 func main() {

@@ -8,8 +8,7 @@ import (
 	"sync"
 	"time"
 
-	"golang.ngrok.com/ngrok/v2"
-	"golang.ngrok.com/ngrok/v2/rpc"
+	"github.com/billythach/ngrok-go/v2/rpc"
 )
 
 func main() {

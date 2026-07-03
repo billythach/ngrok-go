@@ -7,10 +7,10 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/billythach/ngrok-go/v2"
 	"github.com/billythach/ngrok-go/v2/internal/testutil"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"golang.ngrok.com/ngrok/v2"
 )
 
 // TestForward tests forwarding to a local web server

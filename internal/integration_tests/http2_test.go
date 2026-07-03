@@ -9,9 +9,9 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/billythach/ngrok-go/v2"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"golang.ngrok.com/ngrok/v2"
 )
 
 // TestUpstreamProtocolHTTP2 tests the WithUpstreamProtocol option

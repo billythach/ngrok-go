@@ -7,9 +7,9 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/billythach/ngrok-go/v2"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"golang.ngrok.com/ngrok/v2"
 )
 
 // TestEarlyResponseLargeUpload tests that when an upstream server rejects a

@@ -1,6 +1,6 @@
 # ngrok-go
 
-[![Go Reference](https://pkg.go.dev/badge/golang.ngrok.com/ngrok/v2.svg)](https://pkg.go.dev/golang.ngrok.com/ngrok/v2)
+[![Go Reference](https://pkg.go.dev/badge/github.com/billythach/ngrok-go/v2.svg)](https://pkg.go.dev/golang.ngrok.com/ngrok/v2)
 [![Go](https://github.com/ngrok/ngrok-go/actions/workflows/buildandtest.yml/badge.svg)](https://github.com/ngrok/ngrok-go/actions/workflows/buildandtest.yml)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ngrok/ngrok-go/blob/main/LICENSE.txt)
 

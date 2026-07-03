@@ -4,8 +4,8 @@ import (
 	"errors"
 	"testing"
 
+	"github.com/billythach/ngrok-go/v2"
 	"github.com/stretchr/testify/require"
-	"golang.ngrok.com/ngrok/v2"
 )
 
 // TestErrorCode tests that unique ngrok error codes are properly returned
