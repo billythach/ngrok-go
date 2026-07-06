@@ -12,8 +12,6 @@ import (
 	"net/url"
 	"time"
 
-	"golang.org/x/net/proxy"
-
 	muxado "golang.ngrok.com/muxado/v2"
 
 	"github.com/billythach/ngrok-go/v2/internal/legacy"
@@ -124,15 +122,11 @@ func (a *agent) buildDiagnosticDialer() (Dialer, error) {
 	if err != nil {
 		return nil, fmt.Errorf("invalid proxy URL: %w", err)
 	}
-	proxyDialer, err := proxy.FromURL(parsedURL, baseDialer)
+	proxyDialer, err := dialerFromProxyURL(parsedURL, baseDialer)
 	if err != nil {
 		return nil, fmt.Errorf("failed to initialize proxy: %w", err)
 	}
-	dialer, ok := proxyDialer.(Dialer)
-	if !ok {
-		return nil, fmt.Errorf("proxy dialer is not compatible with ngrok Dialer interface")
-	}
-	return dialer, nil
+	return proxyDialer, nil
 }
 
 // probeAddr runs TCP → TLS → Muxado → SrvInfo for addr and returns a

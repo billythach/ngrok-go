@@ -171,6 +171,7 @@ func WithMultiLeg(enable bool) AgentOption {
 }
 
 // WithProxyURL sets the proxy URL to use when connecting to the ngrok service.
+// Supported schemes are http, https, socks5, and socks5h.
 // The URL will be parsed and processed during Connect.
 //
 // If used with WithDialer, the custom dialer will be used to establish the

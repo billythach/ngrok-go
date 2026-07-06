@@ -11,8 +11,6 @@ import (
 	"sync"
 	"time"
 
-	"golang.org/x/net/proxy"
-
 	"github.com/billythach/ngrok-go/v2/internal/legacy"
 	"github.com/billythach/ngrok-go/v2/internal/legacy/config"
 	"github.com/billythach/ngrok-go/v2/rpc"
@@ -122,26 +120,18 @@ func (a *agent) Connect(ctx context.Context) error {
 		}
 
 		// Create a proxy dialer using the base dialer
-		proxyDialer, err := proxy.FromURL(parsedURL, baseDialer)
+		proxyDialer, err := dialerFromProxyURL(parsedURL, baseDialer)
 		if err != nil {
 			debugf("proxy dialer initialization failed: %v", err)
 			return fmt.Errorf("failed to initialize proxy: %w", err)
 		}
 		debugf("proxy dialer initialized successfully")
 
-		// We know FromURL returns a Dialer-compatible type
-		dialer, ok := proxyDialer.(Dialer)
-		if !ok {
-			debugf("proxy dialer type assertion to ngrok Dialer failed (type=%T)", proxyDialer)
-			return fmt.Errorf("proxy dialer is not compatible with ngrok Dialer interface")
-		}
-		debugf("proxy dialer is compatible with ngrok Dialer")
-
 		// Set the dialer in our options
-		a.opts.dialer = dialer
+		a.opts.dialer = proxyDialer
 		debugf("stored proxy dialer in agent options")
 		// Pass it to the legacy package
-		legacyOpts = append(legacyOpts, legacy.WithDialer(dialer))
+		legacyOpts = append(legacyOpts, legacy.WithDialer(proxyDialer))
 		debugf("appended legacy.WithDialer option (total options=%d)", len(legacyOpts))
 	} else {
 		debugf("no proxy URL configured")
