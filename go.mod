@@ -6,7 +6,6 @@ require (
 	github.com/jpillora/backoff v1.0.0
 	github.com/stretchr/testify v1.11.1
 	go.uber.org/multierr v1.11.0
-	github.com/billythach/ngrok-go/v2 v2.1.12
 	golang.ngrok.com/muxado/v2 v2.0.1
 	golang.org/x/net v0.56.0
 	google.golang.org/protobuf v1.36.11
